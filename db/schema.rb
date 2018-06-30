@@ -10,29 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_24_084043) do
+ActiveRecord::Schema.define(version: 2018_06_30_061825) do
 
-  create_table "thread", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "thread_id"
-    t.integer "create_user_id"
-    t.integer "board_id"
-    t.boolean "delete"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "titles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "boards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
+    t.integer "user_id"
+    t.boolean "is_delete"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "handlename"
   end
 
-  create_table "user", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "thread_id"
+    t.string "format"
+    t.boolean "is_delete"
     t.integer "user_id"
-    t.string "handle_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "responses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "thread_id"
+    t.string "content"
+    t.integer "user_id"
+    t.integer "response_id"
+    t.boolean "is_delete"
+    t.integer "file_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "threads", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.integer "board_id"
+    t.boolean "is_delete"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
     t.string "password"
-    t.boolean "delete"
+    t.boolean "is_delete"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
