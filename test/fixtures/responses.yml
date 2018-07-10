@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  thre: one
+  content: MyString
+  user: one
+  response: one
+  up_file: one
+  is_delete: false
+
+two:
+  thre: two
+  content: MyString
+  user: two
+  response: two
+  up_file: two
+  is_delete: false
