@@ -1,17 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  thre: one
-  content: MyString
-  user: one
+  id: 1
+  thre: 花火
+  content: 又吉
+  user: 名無し
   response: one
   up_file: one
   is_delete: false
 
 two:
-  thre: two
-  content: MyString
-  user: two
+  id: 2
+  thre: トランスフォーマー
+  content: オプティマス
+  user: 名無し
   response: two
   up_file: two
   is_delete: false
