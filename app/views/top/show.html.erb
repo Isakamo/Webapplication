@@ -1,0 +1,6 @@
+<h1><%= @boards.name %></h1>
+<% @thres.each_with_index do |thre , idx| %>
+  <p>
+    <%= idx %>. <%= thre.name %> : <%= thre.name %>
+  </p>
+<% end %>

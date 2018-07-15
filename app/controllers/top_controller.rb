@@ -8,7 +8,7 @@ class TopController < ApplicationController
 
   def show
     @boards = Board.find(params[:id])
-    @thres = Thre.where(board_id: params[:board_id])
+    @thres = Thre.where(board_id: params[:id])
   end
 
   def create
