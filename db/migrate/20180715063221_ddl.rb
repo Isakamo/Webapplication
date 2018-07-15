@@ -4,7 +4,7 @@ class Ddl < ActiveRecord::Migration[5.2]
     drop_table( :up_files, if_exists: true)
     drop_table( :thres, if_exists: true)
     drop_table( :boards, if_exists: true)
-  	drop_table( :users, if_exists: true)
+    drop_table( :users, if_exists: true)
     
     create_table :users do |t|
       t.string :name
