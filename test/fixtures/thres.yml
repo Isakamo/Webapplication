@@ -1,15 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
-  name: 花火
-  user: 名無し
-  board_id: 1
+  name: MyString
+  user: one
+  board: one
   is_delete: false
 
 two:
-  id: 2
-  name: トランスフォーマー
-  user: 名無し
-  board_id: 2
+  name: MyString
+  user: two
+  board: two
   is_delete: false
