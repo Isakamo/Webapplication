@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   get 'top', to: 'top#index'
-  get 'top/show/:id' => 'top#show', as: :top_show
-  post 'top/create' => 'top#create'
-  delete 'top/delete/:id' => 'top#delete', as: :top_delete
+  post 'top/create', to: 'top#create'
+  get 'top/show/:id', to: 'top#show', as: :top_show
+  delete 'top/delete/:id', to: 'top#delete', as: :top_delete
+  post 'list/create', to: 'list#create', as: :list_create
   #get 'top/show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

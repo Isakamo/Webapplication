@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  user: one
+  id: 1
+  name: 本
+  user: 名無し１
   is_delete: false
 
 two:
-  name: MyString
-  user: two
+  id: 2
+  name: 映画
+  user: 名無し２
   is_delete: false

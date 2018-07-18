@@ -1,5 +1,5 @@
-<h1>トピック新規登録</h1>
-<%= form_for @newBoards, :url => {:action => 'create'} do |f| %>
-  <%= f.text_field :name %>
-  <%= f.submit %>
-<% end %>
+h1
+  | トピック新規登録
+= form_for @newBoards, :url => {:action => 'create'} do |f|
+  = f.text_field :name
+  = f.submit
