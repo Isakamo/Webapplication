@@ -1,5 +1,19 @@
 h1= @boards.name
 - @thres.each_with_index do |thre , idx|
-  p
-    = idx
-    | \. #{thre.name} : #{thre.name}
+  li
+    = link_to thre.name, list_show_path(thre.id)
+
+
+    h3
+      | 新規書き込み
+    = form_for @newthres, :url => list_create_path do |f|
+      p
+        | お名前
+      p
+        = f.text_field :user
+      p
+        | 本文
+      p
+        = f.text_area :name
+      = f.hidden_field :board_id
+      = f.submit
