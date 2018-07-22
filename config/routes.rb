@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'top', to: 'top#index'
   post 'top/create', to: 'top#create'
   get 'top/list/:id', to: 'top#show', as: :top_show

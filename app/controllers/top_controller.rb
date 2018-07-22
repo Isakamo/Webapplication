@@ -15,8 +15,15 @@ class TopController < ApplicationController
   def create
     #@boards = Board.new(params[:name].permit(:name))
     @boards = Board.new(params[:board].permit(:name))
-    @boards.save
+
+    is_saved = @boards.save
+    
+    if is_saved == false then
+      user.errors.full_messages 
+    end
+
     redirect_to top_path
+
   end
 
   def delete
