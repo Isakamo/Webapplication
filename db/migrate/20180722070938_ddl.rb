@@ -8,8 +8,8 @@ class Ddl < ActiveRecord::Migration[5.2]
 
     create_table :users do |t|
       ## added below fields by namura
-      t.string :name
-      t.boolean :is_delete
+      t.string :name, null: false, default: "anonymous"
+      t.boolean :is_delete, null: false, default: false
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""
@@ -30,61 +30,62 @@ class Ddl < ActiveRecord::Migration[5.2]
       t.string   :last_sign_in_ip
 
       ## Confirmable
-      t.string   :confirmation_token
-      t.datetime :confirmed_at
-      t.datetime :confirmation_sent_at
-      t.string   :unconfirmed_email # Only if using reconfirmable
+      #t.string   :confirmation_token
+      #t.datetime :confirmed_at
+      #t.datetime :confirmation_sent_at
+      #t.string   :unconfirmed_email # Only if using reconfirmable
 
       ## Lockable
-      t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
-      t.string   :unlock_token # Only if unlock strategy is :email or :both
-      t.datetime :locked_at
+      #t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
+      #t.string   :unlock_token # Only if unlock strategy is :email or :both
+      #t.datetime :locked_at
 
 
-      t.timestamps null: false
+      t.timestamps null: false, default: -> { 'NOW()' }
+
     end
 
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
-    add_index :users, :confirmation_token,   unique: true
-    add_index :users, :unlock_token,         unique: true
+    #add_index :users, :confirmation_token,   unique: true
+    #add_index :users, :unlock_token,         unique: true
 
 
     create_table :boards do |t|
-      t.string :name
-      t.references :user, foreign_key: true
-      t.boolean :is_delete
+      t.string :name, null: false, default: ""
+      t.references :user, foreign_key: true, null: true
+      t.boolean :is_delete, null: false, default: false
 
-      t.timestamps
+      t.timestamps null: false, default: -> { 'NOW()' }
     end
 
     create_table :thres do |t|
-      t.string :name
+      t.string :name, null: false, default: ""
       t.references :user, foreign_key: true
       t.references :board, foreign_key: true
-      t.boolean :is_delete
+      t.boolean :is_delete, null: false, default: false
 
-      t.timestamps
+      t.timestamps null: false, default: -> { 'NOW()' }
     end
 
     create_table :up_files do |t|
       t.references :thre, foreign_key: true
       t.string :format
       t.references :user, foreign_key: true
-      t.boolean :is_delete
+      t.boolean :is_delete, null: false, default: false
 
-      t.timestamps
+      t.timestamps null: false, default: -> { 'NOW()' }
     end
 
     create_table :responses do |t|
       t.references :thre, foreign_key: true
-      t.string :content
+      t.string :content, null: false, default: ""
       t.references :user, foreign_key: true
       t.references :response, foreign_key: true
       t.references :up_file, foreign_key: true
-      t.boolean :is_delete
+      t.boolean :is_delete, null: false, default: false
 
-      t.timestamps
+      t.timestamps null: false, default: -> { 'NOW()' }
     end
 
   end
