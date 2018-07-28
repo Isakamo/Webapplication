@@ -1,19 +1,36 @@
-h1= @boards.name
+h1= @thres.name
 - @responses.each_with_index do |response , idx|
   p
     = response.content
 
 
-    h3
-      | 新規書き込み
-    = form_for @newresponses, :url => list_create_path do |f|
-      p
-        | お名前
-      p
-        = f.text_field :user
-      p
-        | 本文
-      p
-        = f.text_area :content
-      = f.hidden_field :thre_id
-      = f.submit
+h3
+  | 新規書き込み
+= form_for @newresponses, :url => list_create_res_path do |f|
+  p
+  | id
+  p
+  = f.text_field :id
+  p
+  | response_id
+  p
+  = f.text_field :response_id
+  p
+  | お名前
+  p
+  = f.text_field :user_id
+  p
+  | 本文
+  p
+  = f.text_area :content
+  p
+  | up_file_id
+  p
+  = f.text_field :up_file_id
+  p
+  | is_delete
+  p
+  = f.text_field :is_delete
+  p
+  = f.text_field :thre_id
+  = f.submit

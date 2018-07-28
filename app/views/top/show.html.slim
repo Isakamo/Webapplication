@@ -4,16 +4,25 @@ h1= @boards.name
     = link_to thre.name, list_show_path(thre.id)
 
 
-    h3
-      | 新規書き込み
-    = form_for @newthres, :url => list_create_path do |f|
-      p
-        | お名前
-      p
-        = f.text_field :user
-      p
-        | 本文
-      p
-        = f.text_area :name
-      = f.hidden_field :board_id
-      = f.submit
+h3
+  | 新規書き込み
+= form_for @newthres, :url => list_create_path do |f|
+  p
+  | id
+  p
+  = f.text_field :id
+  p
+  | お名前
+  p
+  = f.text_field :user_id
+  p
+  | 本文
+  p
+  = f.text_area :name
+  p
+  | is_delete
+  p
+  = f.text_field :is_delete
+  p
+  = f.hidden_field :board_id
+  = f.submit

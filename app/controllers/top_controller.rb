@@ -3,6 +3,7 @@ class TopController < ApplicationController
     #@tilte = 'THE 雑談'
     @boards = Board.all
     @newboards = Board.new
+    @users = User.all
     #render template: 'top/index'
   end
 
@@ -14,8 +15,13 @@ class TopController < ApplicationController
 
   def create
     #@boards = Board.new(params[:name].permit(:name))
-    @boards = Board.new(params[:board].permit(:name))
-    @boards.save
+    @boards = Board.new(params[:board].permit(:id, :user_id, :name, :is_delete))
+    is_saved = @boards.save
+
+    if is_saved == false then
+      #user.errors.full_messages
+      logger.debug(@boards.inspect)
+    end
     redirect_to top_path
   end
 
