@@ -3,11 +3,13 @@
 one:
   id: 0000
   name: MyString0
-  password: MyString
   is_delete: false
+  email: ssss@gmail.com
+  encrypted_password: 0000
 
 two:
   id: 0001
   name: MyString1
-  password: MyString
   is_delete: false
+  email: cccc@gmail.com
+  encrypted_password: 0001

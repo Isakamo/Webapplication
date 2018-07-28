@@ -23,6 +23,7 @@ class TopController < ApplicationController
       logger.debug(@boards.inspect)
     end
     redirect_to top_path
+
   end
 
   def delete
