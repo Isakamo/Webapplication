@@ -18,8 +18,12 @@ class TopController < ApplicationController
     @boards = Board.new(params[:board].permit(:id, :user_id, :name, :is_delete))
     is_saved = @boards.save
 
+    print '################################### '
+    print is_saved
+    print ' ###################################'
+
     if is_saved == false then
-      #user.errors.full_messages
+#      @boards.errors.full_messages
       logger.debug(@boards.inspect)
     end
     redirect_to top_path

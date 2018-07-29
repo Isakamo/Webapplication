@@ -13,23 +13,23 @@
 ActiveRecord::Schema.define(version: 2018_07_22_070938) do
 
   create_table "boards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
+    t.string "name", default: "", null: false
     t.bigint "user_id"
-    t.boolean "is_delete"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean "is_delete", default: false, null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["user_id"], name: "index_boards_on_user_id"
   end
 
   create_table "responses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "thre_id"
-    t.string "content"
+    t.string "content", default: "", null: false
     t.bigint "user_id"
     t.bigint "response_id"
     t.bigint "up_file_id"
-    t.boolean "is_delete"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean "is_delete", default: false, null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["response_id"], name: "index_responses_on_response_id"
     t.index ["thre_id"], name: "index_responses_on_thre_id"
     t.index ["up_file_id"], name: "index_responses_on_up_file_id"
@@ -37,12 +37,12 @@ ActiveRecord::Schema.define(version: 2018_07_22_070938) do
   end
 
   create_table "thres", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
+    t.string "name", default: "", null: false
     t.bigint "user_id"
     t.bigint "board_id"
-    t.boolean "is_delete"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean "is_delete", default: false, null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["board_id"], name: "index_thres_on_board_id"
     t.index ["user_id"], name: "index_thres_on_user_id"
   end
@@ -51,16 +51,16 @@ ActiveRecord::Schema.define(version: 2018_07_22_070938) do
     t.bigint "thre_id"
     t.string "format"
     t.bigint "user_id"
-    t.boolean "is_delete"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean "is_delete", default: false, null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["thre_id"], name: "index_up_files_on_thre_id"
     t.index ["user_id"], name: "index_up_files_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.boolean "is_delete"
+    t.string "name", default: "anonymous", null: false
+    t.boolean "is_delete", default: false, null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -71,19 +71,10 @@ ActiveRecord::Schema.define(version: 2018_07_22_070938) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
-    t.integer "failed_attempts", default: 0, null: false
-    t.string "unlock_token"
-    t.datetime "locked_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
   add_foreign_key "boards", "users"
