@@ -6,7 +6,11 @@ class User < ApplicationRecord
 #         :confirmable, :lockable, :timeoutable, :omniauthable
 
   # added below by namura
-  validates :name, uniqueness: true, length: { minimum: 1 }, length: { maximum: 10 }
+  validates :name, uniqueness: true, length: { minimum: 1 ,maximum: 10}
   validates :is_delete, inclusion: { in: [true, false] }
+
+  #def email_required?
+  #  false
+  #end
 
 end

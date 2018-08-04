@@ -2,9 +2,9 @@ h2
   | Log in
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   .field
-    = f.label :email
+    = f.label :name
     br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
+    = f.text_field :name, autofocus: true, autocomplete: "name"
   .field
     = f.label :password
     br
@@ -15,4 +15,7 @@ h2
       = f.label :remember_me
   .actions
     = f.submit "Log in"
+p
+  |J( ‘ｰ`)し
 = render "devise/shared/links"
+= link_to "top", :top
