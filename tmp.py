@@ -28,10 +28,7 @@ for j in range(K):
     for i in range(N):
         result[f'a{j}'].append(np.round(list(np.random.randn(1)*lambda_true[j] + y_true[i])[0]))
 
-
 result = pd.DataFrame(result)
-
-result.to_csv('input/mendan2.csv',index=False)
 
 yy = result.values
 
