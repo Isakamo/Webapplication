@@ -26,7 +26,7 @@ numer = 0
 #全てのyiとljの誤差が0.01に収まるまで繰り返し
 while (yi_flag == 0 and lj_flag == 0):
     
-    #前回の結果をlコピー
+    #前回の結果をコピー
     last_yi = yi[:]
     last_lj = lj[:]
 
