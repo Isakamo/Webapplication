@@ -1,87 +1,93 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-#各面接官の評価値（テストで5人）
-x_eval = [2,2,3,4,2]
-y_eval = [1,4,3,5,5]
-z_eval = [3,2,1,4,3]
+import numpy as np
+import pandas as pd 
+from copy import deepcopy
+import time
 
-#評価値リスト
-eval_list = [x_eval, y_eval, z_eval]
 
-#初期値
-lj = [1] * len(eval_list)
-yi = [0] * len(x_eval)
+## 初期設定=======================================
 
-#収束判定値
+# 閾値設定
 tol = 0.01
 
-#前回と誤差0.01以内かどうかのフラグ
-yi_flag = 0
-lj_flag = 0
+# テストデータの被験者数と面談者数を設定
+N = 29  # <- 被験者数を設定
+K = 3  # <- 面談者数を設定
 
-#分母分子
-denom = 0
-numer = 0
 
-#全てのyiとljの誤差が0.01に収まるまで繰り返し
-while (yi_flag == 0 and lj_flag == 0):
+
+## テストデータ作成========================================
+y_true = np.round(np.random.rand(N)*2+2)
+lambda_true =  np.array(abs(np.random.rand(K)))
+
+result = {}
+for j in range(K):
+    result[f'a{j}']=[]
+    for i in range(N):
+        result[f'a{j}'].append(np.round(list(np.random.randn(1)*lambda_true[j] + y_true[i])[0]))
+
+
+result = pd.DataFrame(result)
+
+result.to_csv('input/mendan2.csv',index=False)
+
+yy = result.values
+
+
+
+### 斎藤さんプログラムでのテストデータ========================================
+#yy= np.array(
+#        [[2,1,3],
+#         [2,4,2],
+#         [3,3,1],
+#         [4,5,4],
+#         [2,5,3]
+#         ])
+#
+## テストデータの被験者数と面談者数
+#N = yy.shape[0]
+#K = yy.shape[1]
+
+
+
+
+## EMアルゴリズム=======================================
+# y(i)とλ(j)初期化
+y_pred = np.zeros(N).reshape(-1,1)
+lambda_pred = np.ones(K).reshape(1,-1)
+
+# 差分を初期化
+delta_y = 1.0
+delta_lambda = 1.0
+
+# 繰り返し回数を初期化
+i = 0
+
+while(delta_y>tol or delta_lambda>tol):
+    # 繰り返し回数を更新
+    i+=1
+    print(f'i={i}')
     
-    #前回の結果をコピー
-    last_yi = yi[:]
-    last_lj = lj[:]
-
-    """y1の計算"""
-    #面接者の数繰り返し
-    for i in range(len(x_eval)):
-        
-        #評価者の数繰り返し
-        for j in range(len(eval_list)):
-            #分子計算
-            numer = numer + (lj[j] * eval_list[j][i])
-            #分母計算
-            denom = denom + lj[j]     
-        
-        #面接者i人目のy1算出
-        yi[i] = numer / denom
-        
-        #分子分母リセット
-        denom = 0
-        numer = 0
+    # 更新前のy(i)とλ(j)を保存
+    prior_y_pred = deepcopy(y_pred)
+    prior_lambda_pred = deepcopy(lambda_pred)
     
-    #誤差チェック
-    for k in range(len(yi)):
-        yi_flag = 1
-        if abs(yi[k] - last_yi[k]) > tol:
-            yi_flag = 0
-            break
-
-    """ljの計算"""
-    #分母計算
-    denom = len(x_eval)
+    # y(i)の更新
+    y_pred = np.dot(yy,lambda_pred.T)/np.sum(lambda_pred)
     
-    #評価者の数繰り返し
-    for j in range(len(eval_list)):
-        
-        #面接者の数繰り返し
-        for i in range(len(x_eval)):
-            
-            #分子計算
-            numer = numer + (eval_list[j][i] - yi[i])**2
-        
-        #評価者j人目のlj算出
-        lj[j] = numer / denom
-        
-        #分子リセット
-        numer = 0
-    #分母リセット
-    denom = 0
-
-    #誤差チェック
-    for k in range(len(lj)):
-        lj_flag = 1
-        if abs(lj[k] - last_lj[k]) > tol:
-            lj_flag = 0
-            break
-    print(yi)
-    print(lj)
-
+    # λ(j)の更新
+    lambda_pred = np.sum((yy-y_pred)**2,axis=0).reshape(1,-1)/N
+    
+    # 更新前のy(i)とλ(j)との差分を計算
+    delta_y = np.max(abs(y_pred - prior_y_pred))
+    delta_lambda = np.max(abs(lambda_pred - prior_lambda_pred))
+    
+    # 差分を表示
+    print(f'delta_y: {delta_y}')
+    print(f'delta_lambda: {delta_lambda}')
+    print('\n')
+    
+    # 0.5秒停止
+    time.sleep(0.1) 
