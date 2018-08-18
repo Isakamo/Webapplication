@@ -36,7 +36,7 @@ class ListController < ApplicationController
       @responses.user_name = current_user.name
     elsif user_signed_in? == true then
       @responses.user_id = current_user.id
-    elsif @responses.user_name == nil then
+    elsif user_signed_in? == false && @responses.user_name == "" then
       @responses.user_id = ""
       @responses.user_name = "匿名"
     end
