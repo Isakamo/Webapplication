@@ -16,8 +16,12 @@ class TopController < ApplicationController
   def create
     #@boards = Board.new(params[:name].permit(:name))
     @boards = Board.new(params[:board].permit(:id, :user_id, :name, :is_delete))
+    if @boards.is_delete == nil
+      @boards.is_delete = false
+    end
     is_saved = @boards.save
 
+    #debug
     print '################################### '
     print is_saved
     print ' ###################################'

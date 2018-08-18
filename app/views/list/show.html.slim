@@ -1,26 +1,22 @@
 h1= @thres.name
 - @responses.each_with_index do |response , idx|
   p
+    = idx + 1
+    | . 投稿者:
+    = response.user_name
+    - if user_signed_in? && response.user_id == current_user.id then
+      = link_to '[削除]', list_delete_res_path(response.id), method: :delete, data: {confirm: "削除してもよろしいですか？"}
+  p
     = response.content
 
 
+
 h3
-  | 新規書き込み
+  | 投稿
 = form_for @newresponses, :url => list_create_res_path do |f|
   p
-  | id
-  p
-  = f.text_field :id
-  p
-  | response_id
-  p
-  = f.text_field :response_id
-  p
   | お名前
-  p
-  = f.text_field :user_id
-  p
-  | 本文
+  = f.text_field :user_name
   p
   = f.text_area :content
   p
@@ -28,9 +24,7 @@ h3
   p
   = f.text_field :up_file_id
   p
-  | is_delete
-  p
-  = f.text_field :is_delete
-  p
-  = f.text_field :thre_id
+  = f.hidden_field :thre_id
   = f.submit
+
+= link_to 'Back', top_show_path(id: @thres.board_id)

@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2018_07_22_070938) do
     t.bigint "thre_id"
     t.string "content", default: "", null: false
     t.bigint "user_id"
+    t.string "user_name", null: false
     t.bigint "response_id"
     t.bigint "up_file_id"
     t.boolean "is_delete", default: false, null: false

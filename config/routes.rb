@@ -17,7 +17,9 @@ devise_scope :user do
   delete 'top/delete/:id', to: 'top#delete', as: :top_delete
   post 'list/create', to: 'list#create', as: :list_create
   get 'res/:id', to: 'list#show', as: :list_show
+  delete 'list/:id/delete', to: 'list#delete', as: :list_delete
   post 'res/create', to: 'list#create_res', as: :list_create_res
+  delete 'res/:id/delete/:id', to: 'list#delete_res', as: :list_delete_res
   #get 'top/show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

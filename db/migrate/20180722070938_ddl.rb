@@ -83,6 +83,7 @@ class Ddl < ActiveRecord::Migration[5.2]
       t.references :thre, foreign_key: true
       t.string :content, null: false, default: ""
       t.references :user, foreign_key: true
+      t.string :user_name, null: false
       t.references :response, foreign_key: true
       t.references :up_file, foreign_key: true
       t.boolean :is_delete, null: false, default: false

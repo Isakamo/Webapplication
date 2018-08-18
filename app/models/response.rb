@@ -1,6 +1,6 @@
 class Response < ApplicationRecord
   belongs_to :thre
-  belongs_to :user
+  belongs_to :user, optional:true
   belongs_to :response, optional:true
   belongs_to :up_file, optional:true
 

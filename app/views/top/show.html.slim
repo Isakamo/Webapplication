@@ -2,27 +2,17 @@ h1= @boards.name
 - @thres.each_with_index do |thre , idx|
   li
     = link_to thre.name, list_show_path(thre.id)
+    - if user_signed_in? && thre.user_id == current_user.id then
+      = link_to '[削除]', list_delete_path(thre.id), method: :delete, data: {confirm: "削除してもよろしいですか？"}
 
 
 h3
-  | 新規書き込み
+  | スレッド作成
 = form_for @newthres, :url => list_create_path do |f|
   p
-  | id
-  p
-  = f.text_field :id
-  p
-  | お名前
-  p
-  = f.text_field :user_id
-  p
-  | 本文
-  p
-  = f.text_area :name
-  p
-  | is_delete
-  p
-  = f.text_field :is_delete
+  = f.text_field :name
   p
   = f.hidden_field :board_id
   = f.submit
+
+= link_to 'Back', top_path
