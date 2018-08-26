@@ -9,6 +9,7 @@ class Ddl < ActiveRecord::Migration[5.2]
     create_table :users do |t|
       ## added below fields by namura
       t.string :name, null: false, default: ""
+      t.boolean :admin, null: false, default: false
       t.boolean :is_delete, null: false, default: false
 
       ## Database authenticatable

@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   # added below by namura
   validates :name, uniqueness: true, length: { minimum: 1 ,maximum: 10}
+  validates :admin, inclusion: { in: [true, false] }
   validates :is_delete, inclusion: { in: [true, false] }
 
   #def email_required?
