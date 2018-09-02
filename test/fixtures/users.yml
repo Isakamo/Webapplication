@@ -3,6 +3,7 @@
 one:
   id: 0000
   name: MyString0
+  admin: true
   is_delete: false
   email: ssss@gmail.com
   encrypted_password: 0000
@@ -10,6 +11,7 @@ one:
 two:
   id: 0001
   name: MyString1
+  admin: false
   is_delete: false
   email: cccc@gmail.com
   encrypted_password: 0001

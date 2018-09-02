@@ -8,6 +8,18 @@ h1= @thres.name
       = link_to '[削除]', list_delete_res_path(response.id), method: :delete, data: {confirm: "削除してもよろしいですか？"}
   p
     = response.content
+  p
+    /- if response.up_file_id != "" then
+    /    = image_tag(response.up_file_id_url)
+    /- else
+    /    = response.content
+    /- if response.up_file_id != "" then
+    /  - up_file_id = response.up_file_id
+    /  - user_id = response.user_id
+    /  - unless @upfiles.blank?
+    /    - @upfiles.each do |file|
+    /    - if file.id == up_file_id then
+    /      = image_tag(file.format_url)
 
 
 
@@ -19,12 +31,14 @@ h3
   = f.text_field :user_name
   p
   = f.text_area :content
-  p
-  | up_file_id
-  p
-  = f.text_field :up_file_id
+
+  /= f.fields_for, :up_file |g|
+  /= f.file_field :up_file_id, id: :response_up_file_id
   p
   = f.hidden_field :thre_id
   = f.submit
+  P
+/= fields_for @newupfiles || @newupfiles.new, :url => list_create_res_path do |g|
+
 
 = link_to 'Back', top_show_path(id: @thres.board_id)

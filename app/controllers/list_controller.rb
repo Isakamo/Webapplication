@@ -19,8 +19,17 @@ class ListController < ApplicationController
     @thres = Thre.find(params[:id])
     #@thres = Thre.where(board_id: params[:id])
     @newresponses = Response.new(:thre_id => params[:id])
+    #@newresponses = Response.new(params[:response].permit(:id, :thre_id, :content, :user_id, :user_name, :is_delete, :response_id, up_file_attributes: [:format]))
+    #@newresponses.build.up_file
+    #@newupfiles = UpFile.new
     @responses = Response.where(thre_id: params[:id])
+    #@upfiles = UpFile.where(thre_id: params[:id])
   end
+
+  #def new
+  #  @newresponses = Response.new
+  #  @newresponses.up_file.build
+  #end
 
   def delete
     @thres = Thre.find(params[:id])
@@ -30,7 +39,9 @@ class ListController < ApplicationController
   end
 
   def create_res
-    @responses = Response.new(params[:response].permit(:id, :thre_id, :content, :user_id, :user_name, :is_delete, :response_id, :up_file_id))
+    @responses = Response.new(params[:response].permit(:id, :thre_id, :content, :user_id, :user_name, :is_delete, :response_id))
+    #@upfiles = UpFile.new(params[:response].permit(:format))
+    #@upfiles = UpFile.new
     if user_signed_in? == true && @responses.user_name == "" then
       @responses.user_id = current_user.id
       @responses.user_name = current_user.name
@@ -45,6 +56,7 @@ class ListController < ApplicationController
       @responses.is_delete = false
     end
     is_saved = @responses.save
+    #@upfiles.save
     redirect_to list_show_path(params[:response]['thre_id'])
   end
 
@@ -55,4 +67,5 @@ class ListController < ApplicationController
     redirect_to list_show_path(id: @responses.thre_id)
     #redirect_to list_show_path
   end
+
 end

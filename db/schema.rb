@@ -27,13 +27,12 @@ ActiveRecord::Schema.define(version: 2018_07_22_070938) do
     t.bigint "user_id"
     t.string "user_name", null: false
     t.bigint "response_id"
-    t.bigint "up_file_id"
+    t.string "up_file_id"
     t.boolean "is_delete", default: false, null: false
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["response_id"], name: "index_responses_on_response_id"
     t.index ["thre_id"], name: "index_responses_on_thre_id"
-    t.index ["up_file_id"], name: "index_responses_on_up_file_id"
     t.index ["user_id"], name: "index_responses_on_user_id"
   end
 
@@ -83,7 +82,6 @@ ActiveRecord::Schema.define(version: 2018_07_22_070938) do
   add_foreign_key "boards", "users"
   add_foreign_key "responses", "responses"
   add_foreign_key "responses", "thres"
-  add_foreign_key "responses", "up_files"
   add_foreign_key "responses", "users"
   add_foreign_key "thres", "boards"
   add_foreign_key "thres", "users"

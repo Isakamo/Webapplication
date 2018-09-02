@@ -4,4 +4,8 @@ ul
   - @boards.each do |board|
     li
       = link_to board.name, top_show_path(board.id)
-    /= link_to '[削除]', top_delete_path(board.id), method: :delete, data: {confirm: "削除してもよろしいですか？"}
+      - if user_signed_in? == true and current_user.admin == true then
+        = link_to '[削除]', top_delete_path(board.id), method: :delete, data: {confirm: "削除してもよろしいですか？"}
+
+- if user_signed_in? == true and current_user.admin == true then
+  = link_to '板新規作成', top_edit_path

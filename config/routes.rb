@@ -12,7 +12,8 @@ devise_scope :user do
 
   get 'pages/show', to: 'pages#index'
   get 'top', to: 'top#index', as: :top
-  post 'top/create', to: 'top#create'
+  get 'top/edit', to: 'top#edit', as: :top_edit
+  post 'top/create', to: 'top#create', as: :top_create
   get 'top/list/:id', to: 'top#show', as: :top_show
   delete 'top/delete/:id', to: 'top#delete', as: :top_delete
   post 'list/create', to: 'list#create', as: :list_create

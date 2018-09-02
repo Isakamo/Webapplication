@@ -13,23 +13,18 @@ class TopController < ApplicationController
     @thres = Thre.where(board_id: params[:id])
   end
 
+  def edit
+    @newBoards = Board.new
+  end
+
   def create
-    #@boards = Board.new(params[:name].permit(:name))
+    #@boards = Board.new
     @boards = Board.new(params[:board].permit(:id, :user_id, :name, :is_delete))
+    @boards.user_id = current_user.id
     if @boards.is_delete == nil
       @boards.is_delete = false
     end
     is_saved = @boards.save
-
-    #debug
-    print '################################### '
-    print is_saved
-    print ' ###################################'
-
-    if is_saved == false then
-#      @boards.errors.full_messages
-      logger.debug(@boards.inspect)
-    end
     redirect_to top_path
 
   end
