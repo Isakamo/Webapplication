@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Prototype</title>
+        <%= csrf_meta_tags %></%>
+        <%= csp_meta_tag %></%>
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'%></%>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %></%>
+    </head>
+    
+    <body>
+        <header>
+            <img src="../../assets/images/title.png" alt="LOGO">
+            <nav>
+                <%= if user_signed_in? %></%>
+                    <strong>
+                        <a href="pages_show"><%= current_user.name></%>
+                        </a>
+                        <a href="edit_user_registration">プロフェール変更
+                        </a>
+                        <a href="edit_user_registration">ログアウト
+                        </a>
+                    </strong>
+            </nav>
+        </header>
+    
+    </body>
+
+</html>

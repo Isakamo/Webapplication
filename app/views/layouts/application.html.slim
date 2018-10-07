@@ -9,15 +9,20 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     header
+      .logo 
+        img alt="LOGO" src="../../assets/logo.png" width="500"/
       nav
-        - if user_signed_in?
-          strong
-            = link_to current_user.name, pages_show_path
-          = link_to 'プロフィール変更', edit_user_registration_path
-          = link_to 'ログアウト', destroy_user_session_path, method: :delete
-        - else
-          = link_to 'サインアップ', new_user_registration_path
-          = link_to 'ログイン', new_user_session_path
+        ul
+          .global-nav
+              li
+                - if user_signed_in?
+                  strong
+                    = link_to current_user.name, pages_show_path
+                  = link_to 'プロフィール変更', edit_user_registration_path
+                  = link_to 'ログアウト', destroy_user_session_path, method: :delete
+                - else
+                  = link_to 'サインアップ', new_user_registration_path
+                  = link_to 'ログイン', new_user_session_path
     p.notice
       = notice
     p.alert

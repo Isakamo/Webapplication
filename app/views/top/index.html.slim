@@ -1,11 +1,18 @@
-h1
-  | 掲示板
-ul
-  - @boards.each do |board|
-    li
-      = link_to board.name, top_show_path(board.id)
-      - if user_signed_in? == true and current_user.admin == true then
-        = link_to '[削除]', top_delete_path(board.id), method: :delete, data: {confirm: "削除してもよろしいですか？"}
+doctype html
+html
+  head
+    link[href="https://fonts.googleapis.com/css?family=Bitter:400,700|Pinyon+Script" rel="stylesheet"]
+  body#top
+    #wrap
+      .content
+        h1 
+         | Culture Topic
+        ul
+          - @boards.each do |board|
+            li
+              = link_to board.name, top_show_path(board.id)
+              - if user_signed_in? == true and current_user.admin == true then
+                = link_to '[削除]', top_delete_path(board.id), method: :delete, data: {confirm: "削除してもよろしいですか？"}
 
 - if user_signed_in? == true and current_user.admin == true then
   = link_to '板新規作成', top_edit_path

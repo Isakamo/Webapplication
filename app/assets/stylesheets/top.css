@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+#top #wrap {
+    margin-top: 250px;
+}
+
+
+#wrap h1 {
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Bitter', serif;
+}
+
+#wrap .content ul {
+    text-align: center;
+}
+
+#wrap .content li {
+    font-size: 20px;
+    list-style: none;
+}
+
+#top {
+}
+
